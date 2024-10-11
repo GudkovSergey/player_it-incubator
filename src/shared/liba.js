@@ -1,4 +1,4 @@
-export const liba = {
+ export const liba = {
     create(tagName, classes = []) {
         const element = document.createElement(tagName);
         classes.forEach(c => {

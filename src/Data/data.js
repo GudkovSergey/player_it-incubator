@@ -1,4 +1,6 @@
-export const playlists = [
+import { refresh } from "../index.js";
+
+export let playlists = [
     {
         id: 1,
         title: 'Hip-Hop Hits',
@@ -40,3 +42,27 @@ export const playlists = [
     }
 
 ];
+export const deletePlaylist = (id)=>{
+    playlists = playlists.filter(p=>p.id !==id);
+    observers.forEach(( observer)=> observer())
+}
+export const addPlaylist = ()=>{
+   playlists.push({
+    id: Date.now(),
+    title: 'New Playlist',
+    tracks:[]
+   })
+   observers.forEach(( observer)=> observer())
+   
+}
+const observers =[];
+/**
+ * JSDoc
+ * @param {*} observer callback function
+ */
+export const subscribe =(observer)=>{
+observers.push(observer)
+}
+export const unsubscribe =(observer)=>{
+    observers=observers.filter(o=>o !==observer)
+    }
