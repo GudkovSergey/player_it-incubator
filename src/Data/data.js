@@ -4,6 +4,7 @@ export let playlists = [
     {
         id: 1,
         title: 'Hip-Hop Hits',
+        img: '/src/img/cardImage/image1.jpeg',
         tracks: [
             {
                 artist: 'Eminem',
@@ -24,6 +25,7 @@ export let playlists = [
     {
         id: 2,
         title: 'Rap Hits 1990s',
+        img: '/src/img/cardImage/image2.jpeg',
         tracks: [
             {
                 artist: 'Public Enemy',

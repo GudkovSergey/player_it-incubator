@@ -1,0 +1,19 @@
+
+.playlistsHeaderContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.playlistName{
+   margin-top: 31px;
+   margin-left: 64px;
+}
+.addPlaylistButton{
+    width: 156px;
+    height: 36px;
+   background-color: #F6BD41;
+   border-radius: 4px;
+   margin-top: 24px;
+   margin-right: 64px;
+   cursor: pointer;
+}
