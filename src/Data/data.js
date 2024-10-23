@@ -15,7 +15,7 @@ export let playlists = [
                 artist: '50cent',
                 title: 'In da Club',
                 isHot: false,
-                imageSource: '/src/img/cardImage/trackList/track2.jpeg' 
+                imageSource: '/src/img/cardImage/trackList/track2.jpeg'
             }
 
         ]
@@ -35,34 +35,88 @@ export let playlists = [
                 artist: 'Vanila Ice',
                 title: 'Ice Ice Baby',
                 isHot: false,
-                imageSource: '/src/img/cardImage/trackList/track4.jpeg'  
+                imageSource: '/src/img/cardImage/trackList/track4.jpeg'
             }
 
         ]
     }
 
 ];
-export const deletePlaylist = (id)=>{
-    playlists = playlists.filter(p=>p.id !==id);
-    observers.forEach(( observer)=> observer())
+export function emit() {
+    observers.forEach((observer) => observer());
+
 }
-export const addPlaylist = ()=>{
-   playlists.push({
-    id: Date.now(),
-    title: 'New Playlist',
-    tracks:[]
-   })
-   observers.forEach(( observer)=> observer())
-   
+
+export let addEditPlaylistState = {
+    isActive: false,
+    newTitle: '',
+    id: null
+};
+export let setNewTitle = (title) => {
+    addEditPlaylistState.newTitle = title;
+    emit();
 }
-const observers =[];
+
+export const activateAddEditPlaylist = (playlistId = null) => {
+    addEditPlaylistState.isActive = true;
+    if (playlistId) {
+        addEditPlaylistState.id = playlistId;
+        const foundPlaylist = playlists.find((p) => p.id === playlistId);
+        if (!foundPlaylist) {
+            throw new Error('404')
+        }
+        addEditPlaylistState.newTitle = foundPlaylist.title
+    } else {
+        addEditPlaylistState.newTitle = '';
+        addEditPlaylistState.id = null;
+    }
+    emit();
+}
+export let deactivateAddEditPlaylist = () => {
+    addEditPlaylistState.isActive = false;
+    addEditPlaylistState.title = '';
+    addEditPlaylistState.id = null;
+    emit();
+}
+export const deletePlaylist = (id) => {
+    playlists = playlists.filter(p => p.id !== id);
+    emit();
+}
+export const createUpdatePlaylist = () => {
+    if (addEditPlaylistState.newTitle === '') {
+        throw new Error('Empty playlist title is imposible')
+    }
+
+    if (addEditPlaylistState.id) {
+        const foundPlaylist = playlists.find((p) => p.id === addEditPlaylistState.id);
+        if (!foundPlaylist) {
+            throw new Error('404')
+        }
+        foundPlaylist.title = addEditPlaylistState.newTitle;
+
+    } else {
+        playlists.push({
+            id: Date.now(),
+            title: addEditPlaylistState.newTitle,
+            tracks: []
+        })
+    }
+        deactivateAddEditPlaylist();
+
+        emit();
+    
+
+
+
+}
+const observers = [];
 /**
  * JSDoc
  * @param {*} observer callback function
  */
-export const subscribe =(observer)=>{
-observers.push(observer)
+export const subscribe = (observer) => {
+    observers.push(observer)
 }
-export const unsubscribe =(observer)=>{
-    observers=observers.filter(o=>o !==observer)
-    }
+export const unsubscribe = (observer) => {
+    observers = observers.filter(o => o !== observer)
+}

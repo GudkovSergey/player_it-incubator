@@ -1,4 +1,4 @@
-import { addPlaylist } from "../../Data/data.js";
+import { createUpdatePlaylist, activateAddEditPlaylist } from "../../Data/data.js";
 import { liba } from "../../shared/liba.js"
 
 export function PlaylistsHeader() {
@@ -6,7 +6,8 @@ export function PlaylistsHeader() {
     const addNewPlaylistButton = liba.create('button');
     addNewPlaylistButton.append('Add new Playlist');
     addNewPlaylistButton.addEventListener('click', () => {
-        addPlaylist();
+        //addPlaylist();
+        activateAddEditPlaylist()
         
 
     })
