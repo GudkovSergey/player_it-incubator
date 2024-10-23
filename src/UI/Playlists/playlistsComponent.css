@@ -15,6 +15,7 @@
 .stylePlaylistContainer{
     display: flex;
     align-items: flex-start;
+  
 }
 .playlistsTitle{
     width: 236px;

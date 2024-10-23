@@ -1,16 +1,16 @@
-.playlist:first-child {
-    /*margin-top: 29px;*/
+.playlist:nth-child(odd){
+    margin-top: 36px;
     margin-left: 64px;
     width: 570px;
     height: 540px;
     background-color: #1C1C1C;
 }
 
-.playlist:nth-child(n) {
-   /* margin-top: 29px;*/
+ .playlist:nth-child(even) {
+  
     width: 570px;
     height: 540px;
     background-color: #1C1C1C;
     margin-left: 12px;
     margin-top: 36px;
-}
+} 
